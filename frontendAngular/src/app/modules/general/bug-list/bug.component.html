@@ -1,0 +1,55 @@
+<button class="btn btn-success rounded float-right" (click)="openEditNewForm()">Report new Bug</button>
+<br>
+<table class="table" *ngIf="!isLoading">
+  <thead>
+  <tr>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Recording Date</th>
+    <th scope="col">Description</th>
+    <th scope="col">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of bugTrackingModel">
+    <td>{{item.firstName}}</td>
+    <td>{{item.lastName}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.recordingDate}}</td>
+    <td>{{item.description}}</td>
+    <td>{{displayStatus(item)}}</td>
+    <td>
+      <button class="btn btn-secondary" (click)="openEditForm(item)">Edit</button>
+      <button #popoverWindow="ngbPopover"
+              [autoClose]="'outside'"
+              [ngbPopover]="popContent"
+              [popoverClass]="'js-test-popover'"
+              [popoverTitle]="popTitle"
+              [disablePopover]="false"
+              [disabled]="false"
+              class="btn btn-danger"
+              container="body">Delete
+      </button>
+      <ng-template #popContent>
+        <div class="mb-3">
+          <div [innerHtml]="popoverContent(item)"></div>
+        </div>
+        <div class="popover-footer">
+          <button (click)="popoverWindow.toggle()" class="btn btn-sm btn-secondary" type="button">
+            Cancel
+          </button>
+          <button [id]="'pop-over-button-click'" (click)="deleteUser(item)" class="btn btn-danger"
+                  type="button">
+            Delete</button>
+        </div>
+      </ng-template>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #popTitle>
+  <div [innerHtml]="'Delete bug'"></div>
+</ng-template>
+

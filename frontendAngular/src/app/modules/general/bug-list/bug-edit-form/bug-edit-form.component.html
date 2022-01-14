@@ -1,0 +1,103 @@
+<form #f="ngForm" [formGroup]="this.bugTrackForm">
+  <div class="modal-content">
+    <div class="modal-header bg-white">
+      <h6 class="modal-title m-0">Bug save</h6>
+    </div>
+    <div class="modal-body">
+      <div class="card js-test-modal-project-creation">
+        <div class="card-block">
+          <div class="mb-3">
+            <label>First Name:*</label>
+            <div class="input-group input-group-sm">
+              <input
+                formControlName="firstName"
+                [(ngModel)]="bugTrackingModel.firstName"
+                class="form-control form-element-single-part js-test-firstName-input"
+                type="search" required
+              />
+            </div>
+            <div *ngIf="f.invalid && f.submitted && bugTrackForm.controls.firstName.errors" class="alert alert-danger js-test-firstName-danger">
+              <div *ngIf="bugTrackForm.controls.firstName.errors?.required">First Name must be set!</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Last Name:*</label>
+            <div class="input-group input-group-sm">
+              <input
+                formControlName="lastName"
+                [(ngModel)]="bugTrackingModel.lastName"
+                class="form-control form-element-single-part js-test-lastName-input"
+                type="search"/>
+            </div>
+            <div *ngIf="f.invalid && f.submitted && bugTrackForm.controls.lastName.errors" class="alert alert-danger js-test-lastName-danger">
+              <div *ngIf="bugTrackForm.controls.lastName.errors?.required">Last Name must be set!</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Email:*</label>
+            <div class="input-group input-group-sm">
+              <input
+                      formControlName="email"
+                      [(ngModel)]="bugTrackingModel.email"
+                      class="form-control form-element-single-part js-test-email-input"
+                      type="search"/>
+            </div>
+            <div *ngIf="f.invalid && f.submitted && bugTrackForm.controls.email.errors" class="alert alert-danger js-test-lastName-danger">
+              <div *ngIf="bugTrackForm.controls.email.errors?.required">Email must be set!</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Bug Date:*</label>
+            <div class="input-group input-group-sm">
+              <input
+                name="f"
+                formControlName="recordingDate"
+                [(ngModel)]="recordingDateModel"
+                placeholder="yyyy-mm-dd"
+                ngbDatepicker #f="ngbDatepicker"
+                class="form-control form-element-single-part js-test-recordingdate-input"
+                type="search"/>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="f.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div *ngIf="f.invalid && f.submitted && bugTrackForm.controls.recordingDate.errors" class="alert alert-danger js-test-recordingDate-danger">
+              <div *ngIf="bugTrackForm.controls.recordingDate.errors?.required">Date must be set!</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Description:*</label>
+            <div class="input-group input-group-sm">
+              <input
+                      formControlName="description"
+                      [(ngModel)]="bugTrackingModel.description"
+                      class="form-control form-element-single-part js-test-description-input"
+                      type="search"/>
+            </div>
+            <div *ngIf="f.invalid && f.submitted && bugTrackForm.controls.description.errors" class="alert alert-danger js-test-lastName-danger">
+              <div *ngIf="bugTrackForm.controls.description.errors?.required">Description must be set!</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Status:*</label>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" formControlName="status" [(ngModel)]="bugTrackingModel.status"
+                     class="custom-control-input js-test-status-input" id="customSwitches" [checked]="getStatus()">
+              <label class="custom-control-label" for="customSwitches">Active or Inactive</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer bg-white justify-content-between">
+        <button class="btn btn-sm btn-outline-secondary mr-auto rounded" (click)="closeModal()">
+          Cancel
+        </button>
+        <button
+          class="btn btn-success js-test-save" (click)="submit()"
+          type="submit">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
